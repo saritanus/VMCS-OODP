@@ -27,12 +27,24 @@ public class CashStore extends Store {
 	/**This is the constant for coin invalid weight.*/
 	public final static int INVALID_COIN_WEIGHT = 9999;
 
+        private static CashStore instance = null;
 	/**
 	 * This constructor creates an instance of the CashStore object.
 	 */
-	public CashStore() {
+	private CashStore() {
+            System.out.println("Private Default Constructor of Singleton CashStore Called");
 	}
 	
+        public static CashStore getInstance(){
+            if (instance == null){
+                instance = new CashStore();
+            }
+            System.out.println("Inside CashStore Singleton getInstance()");
+            System.out.println("Instantiated static instance of CashStore is returned");
+            return instance;
+        }
+        
+        
 	/**
 	 * This method find and returns the index of the coin in the CashStore of the given Coin&#46;
 	 * @param c the Coin of interest&#46;

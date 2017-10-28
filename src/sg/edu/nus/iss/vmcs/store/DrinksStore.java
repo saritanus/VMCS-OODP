@@ -25,10 +25,24 @@ package sg.edu.nus.iss.vmcs.store;
  * @author Olivo Miotto, Pang Ping Li
  */
 public class DrinksStore extends Store {
+    
+    
+        private static DrinksStore instance = null;
 
 	/**
 	 * This constructor creates an instance of DrinksStore object.
 	 */
-	public DrinksStore() {
+	private DrinksStore() {
+            System.out.println("Private Default Constructor of Singleton DrinksStore Called");
 	}
+
+        public static DrinksStore getInstance(){
+            if (instance == null){
+                instance = new DrinksStore();
+            }
+            System.out.println("Inside DrinksStore Singleton getInstance()");
+            System.out.println("Instantiated static instance of DrinksStore is returned");
+            return instance;
+        }        
+        
 }//End of class DrinksStore
