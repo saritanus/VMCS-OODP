@@ -22,7 +22,7 @@ public class CashStoreTest extends TestCase{
 	@Test
 	public void testCashStoreConstructor() throws Exception{
 		//CashStore constructor does nothing
-		CashStore cashStore=new CashStore();
+		CashStore cashStore= CashStore.getInstance();
 		//Assert
 		assertNotNull(cashStore);
 	}
