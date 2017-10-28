@@ -28,7 +28,7 @@ import sg.edu.nus.iss.vmcs.system.SimulatorControlPanel;
  * @version 3.0 5/07/2003
  * @author Olivo Miotto, Pang Ping Li
  */
-public class MachinerySimulatorPanel extends Dialog {
+public class MachinerySimulatorPanel extends Dialog implements StoreObserver{
 	private static final String TITLE = "Machinery Panel";
 
 	private StoreViewer cashDisplay;
@@ -36,15 +36,22 @@ public class MachinerySimulatorPanel extends Dialog {
 	private Checkbox doorDisplay;
 	private StoreController storeCtrl;
 	private MachineryController machineryCtrl;
+        private StoreItem subject;
 
+        
 	/**
 	 * This constructor creates an instance of MachinerySimulatorPanel.
 	 * @param fr the parent frame.
 	 * @param machCtrl the MachineryController.
 	 */
-	public MachinerySimulatorPanel(Frame fr, MachineryController machCtrl) {
-		super(fr, TITLE, false);
-
+        @Override
+        public void update() {
+            drinksDisplay.update();
+        }
+	public MachinerySimulatorPanel(Frame fr, MachineryController machCtrl,StoreItem subject) {
+		super(fr, TITLE, false);               
+                this.subject = subject;
+                this.subject.attachObserver(this);
 		machineryCtrl = machCtrl;
 		storeCtrl = machineryCtrl.getMainController().getStoreController();
 
@@ -132,7 +139,7 @@ public class MachinerySimulatorPanel extends Dialog {
 	 */
 	public void refresh(){
 		cashDisplay.update();
-		drinksDisplay.update();
+		// 
 	}
 	
 	/**
@@ -144,4 +151,8 @@ public class MachinerySimulatorPanel extends Dialog {
 		drinksDisplay.setActive(state);
 		doorDisplay.setEnabled(state);
 	}
+
+   
+
+    
 }//End of class MachinerySimulatorPanel

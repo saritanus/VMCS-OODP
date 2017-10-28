@@ -13,6 +13,7 @@ import sg.edu.nus.iss.vmcs.customer.TransactionController;
 import sg.edu.nus.iss.vmcs.machinery.MachineryController;
 import sg.edu.nus.iss.vmcs.maintenance.MaintenanceController;
 import sg.edu.nus.iss.vmcs.store.StoreController;
+import sg.edu.nus.iss.vmcs.store.StoreItem;
 import sg.edu.nus.iss.vmcs.util.VMCSException;
 
 /**
@@ -70,7 +71,7 @@ public class MainController {
 			storeCtrl = new StoreController(cashLoader, drinksLoader);
 			storeCtrl.initialize();
 			simulatorCtrl = new SimulationController(this);
-			machineryCtrl = new MachineryController(this);
+                        machineryCtrl = new MachineryController(this);
 			machineryCtrl.initialize();
 			maintenanceCtrl = new MaintenanceController(this);
 			txCtrl=new TransactionController(this);
@@ -110,7 +111,7 @@ public class MainController {
 	 * @return the MachineryController&#46;
 	 */
 	public MachineryController getMachineryController() {
-		return machineryCtrl;
+		return this.machineryCtrl;
 	}
 
 	/**

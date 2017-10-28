@@ -7,6 +7,8 @@
  */
 package sg.edu.nus.iss.vmcs.machinery;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sg.edu.nus.iss.vmcs.system.*;
 import sg.edu.nus.iss.vmcs.util.*;
 import sg.edu.nus.iss.vmcs.store.*;
@@ -25,15 +27,24 @@ public class MachineryController {
 
 	private MachinerySimulatorPanel ml;
 	private Door door;
+        //StoreItem observable = new StoreItem();
 
 	/**
 	 * This constructor creates an instance of MachineryController.
 	 * @param mctrl the MainController.
 	 */
-	public MachineryController(MainController mctrl) {
+	public MachineryController(MainController mctrl ){
+              
 		mainCtrl = mctrl;
-		storeCtrl = mctrl.getStoreController();
-	}
+		storeCtrl = mctrl.getStoreController();              
+	} 
+        
+        
+        
+        public void unsubscribe()
+        {
+           // observable.detachObserver(this);
+        }
 
 	/**
 	 * This method returns the MainController.
@@ -68,8 +79,9 @@ public class MachineryController {
 	 */
 	public void displayMachineryPanel() {
 		SimulatorControlPanel scp = mainCtrl.getSimulatorControlPanel();
-		if (ml == null)
-			ml = new MachinerySimulatorPanel(scp, this);
+		
+                if (ml == null)
+			ml = new MachinerySimulatorPanel(scp, this,new StoreItem());
 		ml.display();
 		scp.setActive(SimulatorControlPanel.ACT_MACHINERY, false);
 	}
@@ -138,7 +150,8 @@ public class MachineryController {
 	public void displayDrinkStock() throws VMCSException {
 		if (ml == null)
 			return;
-		ml.getDrinksStoreDisplay().update();
+                
+                ml.getDrinksStoreDisplay().update();
 	}
 
 	/**
@@ -204,4 +217,6 @@ public class MachineryController {
 			ml.refresh();
 		}
 	}
+
+   
 }//End of class MachineryController

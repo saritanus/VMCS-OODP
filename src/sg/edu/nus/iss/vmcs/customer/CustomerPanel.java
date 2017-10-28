@@ -74,6 +74,7 @@ import sg.edu.nus.iss.vmcs.util.WarningDisplay;
  * @version 1.0 2008-10-01
  */
 public class CustomerPanel extends Dialog {
+    
 	private Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
 	private int frameX=0;
 	private int frameY=0;
@@ -85,7 +86,7 @@ public class CustomerPanel extends Dialog {
 	private static final String TITLE = "Customer Panel";
 	private TransactionController txCtrl;
 
-	private Panel pan0=new Panel();
+    private Panel pan0=new Panel();
     private Label lblTitle=new Label("VMCS Soft Drinks Dispenser");
     private Label lblEnterCoins=new Label("Enter Coins Here");
     private CoinInputBox coinInputBox;
@@ -161,8 +162,8 @@ public class CustomerPanel extends Dialog {
 			    new Insets(2,0,20,0),10,0));
 		
 		setLayout(new BorderLayout());
-	    add(lblTitle,BorderLayout.NORTH);
-	    add(pan0,BorderLayout.CENTER);
+                add(lblTitle,BorderLayout.NORTH);
+                add(pan0,BorderLayout.CENTER);
 	    
 		pack();
 		frameWidth=this.getWidth();

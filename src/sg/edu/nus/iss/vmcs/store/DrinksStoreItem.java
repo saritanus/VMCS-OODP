@@ -35,5 +35,6 @@ public class DrinksStoreItem extends StoreItem {
 	 */
 	public DrinksStoreItem(DrinksBrand ob, int qty) {
 		super((StoreObject) ob, qty);
+                
 	}
 }//End of class DrinksStoreItem
