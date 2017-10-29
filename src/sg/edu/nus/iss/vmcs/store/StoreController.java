@@ -32,6 +32,8 @@ public class StoreController {
 
 	private PropertyLoader cashLoader;
 	private PropertyLoader drinksLoader;
+        
+        StoreFactory storeFactory = new StoreFactory();
 
 	/**
 	 * This constructor creates an instance of StoreController object.
@@ -51,8 +53,10 @@ public class StoreController {
 	 */
 	public void initialize() throws IOException {
                 System.out.println("Initializing Store Objects");
-		cStore = CashStore.getInstance();
-		dStore = DrinksStore.getInstance();
+                System.out.println("Calling StoreFactory to initialize CashStore instance");
+		cStore = (CashStore) StoreFactory.getStore("Cash");
+                System.out.println("Calling StoreFactory to initialize DrinksStore instance");
+		dStore = (DrinksStore) StoreFactory.getStore("Drinks");
 		initializeStores();
 	}
 
