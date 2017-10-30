@@ -113,10 +113,14 @@ public class StoreController {
 	 * @param c the Coin to be stored.
 	 */
 	public void storeCoin(Coin c) {
-		int idx = cStore.findCashStoreIndex(c);
+		CashStoreIterator id = ((CashStore)getStore(Store.CASH)).CreateIterator();
+                System.out.println("Iterator Pattern: CashStoreIterator has been created to find storing index");
+                        int idx=id.findCashStoreIndex(c);
 		CashStoreItem item;
-		item = (CashStoreItem) this.getStoreItem(Store.CASH, idx);
+		item = (CashStoreItem) this.getStoreItem(Store.CASH, --idx);
 		item.increment();
+                                
+
 	}
 
 	/**

@@ -43,6 +43,10 @@ public class CashStore extends Store {
             System.out.println("Instantiated static instance of CashStore is returned");
             return instance;
         }
+        public CashStoreIterator CreateIterator() 
+       {
+       return new CashStoreIterator(this);
+	}
         
         
 	/**

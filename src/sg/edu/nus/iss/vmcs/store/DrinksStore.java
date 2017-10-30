@@ -44,5 +44,10 @@ public class DrinksStore extends Store {
             System.out.println("Instantiated static instance of DrinksStore is returned");
             return instance;
         }        
+        @Override
+	public DrinkStoreIterator CreateIterator() {
+		return new DrinkStoreIterator(this);
+	}
+  
         
 }//End of class DrinksStore
