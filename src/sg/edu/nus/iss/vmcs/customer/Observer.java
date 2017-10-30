@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sg.edu.nus.iss.vmcs.store;
+package sg.edu.nus.iss.vmcs.customer;
 
 /**
  *
  * @author Sarita
  */
-public interface StoreItemSubject {
+public interface Observer {
+    void update (Observable observable);
     
-    public void attachObserver(StoreObserver observer);
-    public void detachObserver(StoreObserver observer);
-    public void notifyObserver();
 }

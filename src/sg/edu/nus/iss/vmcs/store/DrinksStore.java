@@ -21,8 +21,8 @@ package sg.edu.nus.iss.vmcs.store;
  * @see StoreItem
  * @see StoreObject
  * 
- * @version 3.0 5/07/2003
- * @author Olivo Miotto, Pang Ping Li
+ * @version 4.0 30/10/2017
+ * @author Olivo Miotto, Pang Ping Li, Modified By: Gautam Krishnan Chittaranjana
  */
 public class DrinksStore extends Store {
     
@@ -33,21 +33,18 @@ public class DrinksStore extends Store {
 	 * This constructor creates an instance of DrinksStore object.
 	 */
 	private DrinksStore() {
-            System.out.println("Private Default Constructor of Singleton DrinksStore Called");
+            System.out.println(">>Private Default Constructor of Singleton DrinksStore Called");
 	}
 
         public static DrinksStore getInstance(){
             if (instance == null){
                 instance = new DrinksStore();
             }
-            System.out.println("Inside DrinksStore Singleton getInstance()");
-            System.out.println("Instantiated static instance of DrinksStore is returned");
+            System.out.println(">>Inside DrinksStore Singleton getInstance()");
+            System.out.println(">>Instantiated static instance of DrinksStore is returned");
             return instance;
         }        
-        @Override
-	public DrinkStoreIterator CreateIterator() {
-		return new DrinkStoreIterator(this);
-	}
+        
   
         
 }//End of class DrinksStore

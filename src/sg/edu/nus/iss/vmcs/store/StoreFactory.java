@@ -9,7 +9,8 @@ package sg.edu.nus.iss.vmcs.store;
  *
  * This is a Factory Class to Instantiate CashStore and DrinksStore
  * 
- * @author Gautam
+ * @author Gautam Krishnan Chittaranjana
+ * @version 1.0 30/10/2017
  */
 public class StoreFactory {
     
@@ -18,11 +19,11 @@ public class StoreFactory {
             return null;
         }
         if (store.equalsIgnoreCase("Cash")) {
-            System.out.println("Inside StoreFactoy.getStore(), method returns Singleton instance of CashStore");
+            System.out.println(">>Inside StoreFactoy.getStore(), method returns Singleton instance of CashStore");
             return CashStore.getInstance();
         }
         else if (store.equalsIgnoreCase("Drinks")) {
-            System.out.println("Inside StoreFactoy.getStore(), method returns Singleton instance of DrinksStore");
+            System.out.println(">>Inside StoreFactoy.getStore(), method returns Singleton instance of DrinksStore");
             return DrinksStore.getInstance();
         }
         

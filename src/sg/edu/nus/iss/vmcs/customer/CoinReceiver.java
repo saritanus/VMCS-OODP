@@ -20,7 +20,7 @@ import sg.edu.nus.iss.vmcs.util.VMCSException;
  * @author Team SE16T5E
  * @version 1.0 2008-10-01
  */
-public class CoinReceiver {
+public class CoinReceiver extends Observable{
 	private TransactionController txCtrl;
 	
 	/**List of the Coins entered during the transaction.*/
@@ -37,6 +37,17 @@ public class CoinReceiver {
 		arlCoins=new ArrayList();
 		setTotalInserted(0);
 	}
+         
+    @Override
+    public void setState(Object o) {
+        Integer total = Integer.parseInt(o.toString());
+        this.setTotalInserted((total));
+     }
+
+    @Override
+    public Object getState() {
+        return this.getTotalInserted();
+    }
 	
 	/**
 	 * Commence receiving a series of Coins&#46;  To do this the Coin Receiver
@@ -75,21 +86,17 @@ public class CoinReceiver {
 	public void receiveCoin(double weight){
 		CashStore cashStore=(CashStore)txCtrl.getMainController().getStoreController().getStore(Store.CASH);
 		Coin coin=cashStore.findCoin(weight);
-		if(coin==null){
-			txCtrl.getCustomerPanel().displayInvalidCoin(true);
-			txCtrl.getCustomerPanel().setChange("Invalid Coin");
-			//txCtrl.getCustomerPanel().setCoinInputBoxActive(false);
-		}
-		else{
-			txCtrl.getCustomerPanel().setCoinInputBoxActive(false);
-			int value=coin.getValue();
-			txCtrl.getCustomerPanel().displayInvalidCoin(false);
+                
+		if(coin!=null)
+                {
+                        
+                        int value=coin.getValue();
 			arlCoins.add(coin);
-			setTotalInserted(getTotalInserted() + value);
-			//int total=txCtrl.getCustomerPanel().addMoney(value);
-			txCtrl.getCustomerPanel().setTotalMoneyInserted(getTotalInserted());
-			txCtrl.getCustomerPanel().setChange("");
-			txCtrl.processMoneyReceived(getTotalInserted());
+                        setTotalInserted(getTotalInserted() + value);
+                        this.notifyObserver();
+		//	txCtrl.processMoneyReceived(getTotalInserted());
+                       
+                        
 		}
 	}
 
@@ -179,4 +186,6 @@ public class CoinReceiver {
 	public int getTotalInserted() {
 		return totalInserted;
 	}
+
+  
 }//End of class CoinReceiver

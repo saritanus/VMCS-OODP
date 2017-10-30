@@ -9,16 +9,11 @@ package sg.edu.nus.iss.vmcs.store;
  *
  * @author Srishti Bhargava
  */
-public class DrinkStoreIterator extends StoreIterator {
-
-   
+public class DrinkStoreIterator extends StoreIterator {   
        private DrinksStore store;
 	public DrinkStoreIterator(DrinksStore store) {
 		super(store);
 		this.store=store;
-	}
-	
-
-    
+	}    
     }
     

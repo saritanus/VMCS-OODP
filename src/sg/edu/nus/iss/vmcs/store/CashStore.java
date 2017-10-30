@@ -20,8 +20,8 @@ package sg.edu.nus.iss.vmcs.store;
  * @see StoreItem
  * @see StoreObject
  * 
- * @version 3.0 5/07/2003
- * @author Olivo Miotto, Pang Ping Li
+ * @version 4.0 30/10/2017
+ * @author Olivo Miotto, Pang Ping Li, Modified By: Gautam Krishnan Chittaranjan
  */
 public class CashStore extends Store {
 	/**This is the constant for coin invalid weight.*/
@@ -32,15 +32,15 @@ public class CashStore extends Store {
 	 * This constructor creates an instance of the CashStore object.
 	 */
 	private CashStore() {
-            System.out.println("Private Default Constructor of Singleton CashStore Called");
+            System.out.println(">> Private Default Constructor of Singleton CashStore Called");
 	}
 	
         public static CashStore getInstance(){
             if (instance == null){
                 instance = new CashStore();
             }
-            System.out.println("Inside CashStore Singleton getInstance()");
-            System.out.println("Instantiated static instance of CashStore is returned");
+            System.out.println(">> Inside CashStore Singleton getInstance()");
+            System.out.println(">> Instantiated static instance of CashStore is returned");
             return instance;
         }
         public CashStoreIterator CreateIterator() 

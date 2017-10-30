@@ -23,8 +23,8 @@ import java.io.IOException;
  * @see StoreItem
  * @see StoreObject
  * 
- * @version 3.0 5/07/2003
- * @author Olivo Miotto, Pang Ping Li
+ * @version 4.0 30/10/2017
+ * @author Olivo Miotto, Pang Ping Li,  Modified By: Gautam Krishnan Chittaranjana
  */
 public class StoreController {
 	private CashStore cStore;
@@ -52,10 +52,10 @@ public class StoreController {
 	 * @throws IOException if fail to initialize stores; reading properties.
 	 */
 	public void initialize() throws IOException {
-                System.out.println("Initializing Store Objects");
-                System.out.println("Calling StoreFactory to initialize CashStore instance");
+                System.out.println(">>Initializing Store Objects");
+                System.out.println(">>Calling StoreFactory to initialize CashStore instance");
 		cStore = (CashStore) StoreFactory.getStore("Cash");
-                System.out.println("Calling StoreFactory to initialize DrinksStore instance");
+                System.out.println(">>Calling StoreFactory to initialize DrinksStore instance");
 		dStore = (DrinksStore) StoreFactory.getStore("Drinks");
 		initializeStores();
 	}
@@ -114,7 +114,7 @@ public class StoreController {
 	 */
 	public void storeCoin(Coin c) {
 		CashStoreIterator id = ((CashStore)getStore(Store.CASH)).CreateIterator();
-                System.out.println("Iterator Pattern: CashStoreIterator has been created to find storing index");
+                System.out.println(">>Iterator Pattern: CashStoreIterator has been created to find storing index");
                         int idx=id.findCashStoreIndex(c);
 		CashStoreItem item;
 		item = (CashStoreItem) this.getStoreItem(Store.CASH, --idx);

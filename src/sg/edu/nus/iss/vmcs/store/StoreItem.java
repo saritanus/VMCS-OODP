@@ -7,8 +7,6 @@
  */
 package sg.edu.nus.iss.vmcs.store;
 
-import java.util.ArrayList;
-
 /**
  * This entity object implements a generic storage item class&#46; It performs actions like;
  * returning content (Store Item identification), setting quantity, returning quantity,
@@ -27,32 +25,9 @@ import java.util.ArrayList;
  * @version 3.0 5/07/2003
  * @author Olivo Miotto, Pang Ping Li
  */
-public class StoreItem implements StoreItemSubject{
-    
-    private StoreObject content;
-    private int quantity;
-    private ArrayList<StoreObserver> observers; 
-
-    public StoreItem() {
-        this.observers = new ArrayList<>();
-   }
-        
-    
-    @Override
-    public void attachObserver(StoreObserver observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void detachObserver(StoreObserver observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObserver() {
-      for(StoreObserver observer:observers )
-          observer.update();          
-    }
+public class StoreItem {
+	private StoreObject content;
+	private int quantity;
 
 	/**
 	 * This constructor creates an instance of StoreItem.
@@ -86,7 +61,6 @@ public class StoreItem implements StoreItemSubject{
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-                notifyObserver();
 	}
 
 	/**
@@ -111,7 +85,6 @@ public class StoreItem implements StoreItemSubject{
 		quantity--;
 		if (quantity < 0)
 			quantity = 0;
-               notifyObserver();
 	}
 
 	/**
@@ -120,6 +93,4 @@ public class StoreItem implements StoreItemSubject{
 	public void increment() {
 		quantity++;
 	}
-
-   
 }//End of class StoreItem

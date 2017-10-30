@@ -29,7 +29,7 @@ import sg.edu.nus.iss.vmcs.system.SimulatorControlPanel;
  * @author Team SE16T5E
  * @version 1.0 2008-10-01
  */
-public class TransactionController {
+public class TransactionController implements Observer {
 	private MainController mainCtrl;
 	private CustomerPanel custPanel;
 	private DispenseController dispenseCtrl;
@@ -54,7 +54,13 @@ public class TransactionController {
 		dispenseCtrl=new DispenseController(this);
 		coinReceiver=new CoinReceiver(this);
 		changeGiver=new ChangeGiver(this);
+                
 	}
+        @Override
+        public void update(Observable observable) {
+            Object data = ((CoinReceiver)observable).getState();
+            this.processMoneyReceived(Integer.parseInt(data.toString()));
+         }
 
 	/**
 	 * This method returns the MainController.
@@ -74,7 +80,7 @@ public class TransactionController {
 		dispenseCtrl.updateDrinkPanel();
 		dispenseCtrl.allowSelection(true);
 		changeGiver.displayChangeStatus();
-		coinReceiver.setActive(false);
+		coinReceiver.setActive(false);                
 	}
 	
 	/**
@@ -105,8 +111,11 @@ public class TransactionController {
 		dispenseCtrl.allowSelection(false);
 		coinReceiver.startReceiver();
 		custPanel.setTerminateButtonActive(true);
+                coinReceiver.addObserver(custPanel);
+                coinReceiver.addObserver(this);
+                
 	}
-	
+        	
 	/**
 	 * This method processes the money received by the Coin Receiver during the progress
 	 * of a transaction&#46;  The following actions are performed during this method:
@@ -343,4 +352,6 @@ public class TransactionController {
 	public void nullifyCustomerPanel(){
 		custPanel=null;
 	}
+
+   
 }//End of class TransactionController

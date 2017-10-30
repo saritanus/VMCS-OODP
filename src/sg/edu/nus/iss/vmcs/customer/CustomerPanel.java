@@ -1,19 +1,4 @@
-/*
- * Copyright 2003 ISS.
- * The contents contained in this document may not be reproduced in any
- * form or by any means, without the written permission of ISS, other
- * than for the purpose for which it has been supplied.
- *
- */
 package sg.edu.nus.iss.vmcs.customer;
-
-/*
- * Copyright 2003 ISS.
- * The contents contained in this document may not be reproduced in any
- * form or by any means, without the written permission of ISS, other
- * than for the purpose for which it has been supplied.
- *
- */
 
 import java.awt.BorderLayout;
 import java.awt.Button;
@@ -73,8 +58,7 @@ import sg.edu.nus.iss.vmcs.util.WarningDisplay;
  * @author Team SE16T5E
  * @version 1.0 2008-10-01
  */
-public class CustomerPanel extends Dialog {
-    
+public class CustomerPanel extends Dialog implements Observer{
 	private Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
 	private int frameX=0;
 	private int frameY=0;
@@ -86,7 +70,7 @@ public class CustomerPanel extends Dialog {
 	private static final String TITLE = "Customer Panel";
 	private TransactionController txCtrl;
 
-    private Panel pan0=new Panel();
+	private Panel pan0=new Panel();
     private Label lblTitle=new Label("VMCS Soft Drinks Dispenser");
     private Label lblEnterCoins=new Label("Enter Coins Here");
     private CoinInputBox coinInputBox;
@@ -162,8 +146,8 @@ public class CustomerPanel extends Dialog {
 			    new Insets(2,0,20,0),10,0));
 		
 		setLayout(new BorderLayout());
-                add(lblTitle,BorderLayout.NORTH);
-                add(pan0,BorderLayout.CENTER);
+	    add(lblTitle,BorderLayout.NORTH);
+	    add(pan0,BorderLayout.CENTER);
 	    
 		pack();
 		frameWidth=this.getWidth();
@@ -173,6 +157,29 @@ public class CustomerPanel extends Dialog {
         setBounds(frameX,frameY,frameWidth, frameHeight);
 	}
 
+        @Override
+        public void update(Observable observable) {
+            Object data = ((CoinReceiver)observable).getState();
+            int value = Integer.parseInt(data.toString());
+            this.setTotalMoneyInserted(value);
+            updateDisplay(value);
+         
+        }
+        
+        private void updateDisplay(int coin)
+        {
+            if(coin==0){
+			displayInvalidCoin(true);
+			setChange("Invalid Coin");
+			//txCtrl.getCustomerPanel().setCoinInputBoxActive(false);
+	    }
+	   else{
+			setCoinInputBoxActive(false);
+			displayInvalidCoin(false);
+			//txCtrl.processMoneyReceived(getTotalInserted());
+                        
+		}
+        }
 	/**
 	 * Display the Customer Panel&#46; This will be achieved by displaying the frame
 	 * of the panel and then sending messages to its constituent objects 
@@ -359,4 +366,6 @@ public class CustomerPanel extends Dialog {
 		Component c=this.getComponent(comp);
 		c.setEnabled(st);
 	}
+
+  
 }//End of class CustomerPanel
